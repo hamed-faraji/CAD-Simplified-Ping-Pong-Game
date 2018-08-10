@@ -36,6 +36,14 @@ end component;
 
 begin
 
+GA_pseudorng: pseudorng
+			port map(
+				clock => CLK_50Mhz,
+				reset => RESET,
+				en => '1',
+				Q => random
+			);
+
 
 
 
