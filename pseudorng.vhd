@@ -24,3 +24,27 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
+
+
+entity pseudorng is
+	Port ( clock : in STD_LOGIC;
+		reset : in STD_LOGIC;
+		en : in STD_LOGIC;
+		Q : out STD_LOGIC_VECTOR (7 downto 0);
+		check: out STD_LOGIC);
+	
+	--       constant seed: STD_LOGIC_VECTOR(7 downto 0) := "00000001";
+end pseudorng;
+
+--}} End of automatically maintained section
+
+architecture asdas of pseudorng is		
+
+
+
+begin
+
+
+
+
+end asdas;
