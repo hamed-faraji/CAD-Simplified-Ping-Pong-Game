@@ -34,6 +34,11 @@ Component pseudorng
 end component;
 
 
+
+
+  signal random : STD_LOGIC_VECTOR (7 downto 0);
+
+
 begin
 
 GA_pseudorng: pseudorng
