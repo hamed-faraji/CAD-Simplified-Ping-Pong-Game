@@ -25,6 +25,14 @@ end VGA_board;
 
 architecture Behavioral of VGA_board is
 
+Component pseudorng
+	Port ( clock : in STD_LOGIC;
+			reset : in STD_LOGIC;
+			en : in STD_LOGIC;
+			Q : out STD_LOGIC_VECTOR (7 downto 0)
+			);
+end component;
+
 
 begin
 
