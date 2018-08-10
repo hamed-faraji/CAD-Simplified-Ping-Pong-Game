@@ -165,6 +165,28 @@ begin
 				ScanlineX	=> ScanlineX,
 				ScanlineY	=> ScanlineY
 			);
+			
+			--------- Moving board -----------
+		VGA_BR: VGA_board
+			port map(
+				CLK_50MHz		=> CLOCK3_50,
+				RESET				=> not RESET_N,
+				key0 				=> key(0),
+				key1  			=> key(1),
+				key2 				=> key(2),
+				key3 				=> key(3),
+				ColorOut	      => ColorTable,
+				SQUAREWIDTH		=> "00011001",
+				ScanlineX		=> ScanlineX,
+				player1score   => player1score_show,
+				player2score   => player2score_show,
+				ScanlineY		=> ScanlineY,
+				start_stop     => SW(0) and (not win) ,
+				speedMulti     => speedTimer,
+				single_double  => SW(1),
+				level          => SW(2)
+				
+			);
 		
 	
 	
