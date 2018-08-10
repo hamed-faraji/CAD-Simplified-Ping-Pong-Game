@@ -144,6 +144,11 @@ end function convSEG;
 signal Counter : integer;
 signal ScanlineX,ScanlineY	: std_logic_vector(10 downto 0);
 signal ColorTable	: std_logic_vector(11 downto 0);
+signal player1score_show : std_logic_vector(3 downto 0);
+signal player2score_show : std_logic_vector(3 downto 0);
+signal countValue : std_logic_vector(6 downto 0):= "0000000";
+signal win : std_logic := '0';
+signal speedTimer : std_logic_vector(3 downto 0) := "0000";
 
 
 
