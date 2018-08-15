@@ -232,6 +232,17 @@ begin
 			end if;
 		end process;
 		
+		process(CLOCK_50, RESET_N)
+		begin
+			if (RESET_N = '0') then
+				HEX2 <= convSEG("0000");
+				HEX3 <= convSEG("0000");
+				second <="0000";
+				minute<="000";
+			elsif (rising_edge(CLOCK_50)) then
+			end if;
+		end process;
+		
 	
 	
 		
