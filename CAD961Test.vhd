@@ -192,6 +192,45 @@ begin
 				level          => SW(2)
 				
 			);
+			
+		--------- 7Segment Show ------------	
+		Process(CLOCK_50, RESET_N)
+		begin
+			if (RESET_N = '0') then
+				Counter <= 0; -- reset timer for counter 
+				countValue <= "0000000"; -- reset seconds has elapsed
+				speedTimer <= (others => '0');
+			elsif (rising_edge(CLOCK_50)) then
+				if SW(0) = '1' and win = '0' then
+				
+					if Counter = 40000000 then
+						Counter <= 0;
+						countValue <= countValue + 1;
+						if countValue = 1 then
+							speedTimer <= speedTimer+1;
+						end if;
+						if countValue = 15 then
+							speedTimer <= speedTimer+1;
+						end if;
+						if countValue = 30 then
+							speedTimer <= speedTimer+1;
+						end if;
+						if countValue = 45 then
+							speedTimer <= speedTimer+1;
+						end if;
+						if countValue = 60 then
+							speedTimer <= speedTimer+1;
+						end if;
+						if countValue = 75 then
+							countValue <= "0000000";
+							Counter <= 0;
+						end if;		
+					else
+						Counter <= Counter +1;
+					end if;
+				end if; 
+			end if;
+		end process;
 		
 	
 	
