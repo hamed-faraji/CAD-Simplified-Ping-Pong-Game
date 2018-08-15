@@ -240,6 +240,19 @@ begin
 				second <="0000";
 				minute<="000";
 			elsif (rising_edge(CLOCK_50)) then
+				if counter = 40000000 then
+					-- timer
+					if second = "1001" then
+						minute <= minute+1;
+						second <="0000";
+						HEX2 <= convSEG(second);	
+						HEX3 <= convSEG("0"&minute); 
+					else
+						second <= second+1;
+						HEX2 <= convSEG(second);	
+						HEX3 <= convSEG("0"&minute); 
+					end if;
+				end if;
 			end if;
 		end process;
 		
