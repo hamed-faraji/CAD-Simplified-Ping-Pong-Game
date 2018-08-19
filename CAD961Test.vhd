@@ -294,6 +294,16 @@ begin
 				win <= '1'; 
 			end if;
 		end process;
+		process(wintemp,RESET_N)
+		begin
+			if RESET_N = '0' then 
+				wintemp <= '0';
+			elsif SW(0) = '1' then
+				wintemp <= '1';
+			else
+				wintemp <= '0';
+			end if;
+		end process;
 			
 		
 	
