@@ -276,6 +276,18 @@ begin
 						win <= '1';
 					end if;
 				end if;
+				if  player1score_show < 10 then 
+					HEX4 <= convSEG(player1score_show);
+					HEX5 <= convSEG("0000");
+				else   
+					HEX5 <= convSEG("0001");
+					Hex4 <= convSEG("000" & player1score_show(0));
+					if player1score_show(0) = '1' then
+						win <= '1';
+					end if;
+				end if;
+				check <= '0';
+				else
 			end if;
 		end process;
 			
