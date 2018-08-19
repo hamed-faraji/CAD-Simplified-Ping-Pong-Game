@@ -289,6 +289,10 @@ begin
 				check <= '0';
 				else
 			end if;
+			-- check for end game by finishing time
+			if countValue = 75 then 
+				win <= '1'; 
+			end if;
 		end process;
 			
 		
