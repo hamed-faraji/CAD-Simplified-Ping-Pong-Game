@@ -256,6 +256,30 @@ begin
 			end if;
 		end process;
 		
+		process(player1score_show,player2score_show,check,win,RESET_N)
+		begin
+			if (RESET_N = '0' or (check = '1' and win='0'and wintemp = '0')) then
+				HEX0 <= convSEG("0001");
+				HEX1 <= convSEG("0010");
+				HEX4 <= convSEG("0011");
+				HEX5 <= convSEG("0011");
+				win <= '0';
+				check <= '1';
+			elsif (SW(0) = '1' or check = '0') then 	
+				if player2score_show < 10 then  
+					HEX0 <= convSEG(player2score_show);
+					HEX1 <= convSEG("0000");
+				else
+					HEX1 <= convSEG("0001");
+					Hex0 <= convSEG("000" & player2score_show(0));
+					if player2score_show(0) = '1' then
+						win <= '1';
+					end if;
+				end if;
+			end if;
+		end process;
+			
+		
 	
 	
 		
