@@ -304,10 +304,9 @@ begin
 				wintemp <= '0';
 			end if;
 		end process;
-			
+		-- show LED after win = 1
 		
-	
-	
-		
+	 LEDR <= (others => '1') when win = '1'
+	 else (others => '0');	
 	 
 end CAD961Test;
