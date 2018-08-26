@@ -164,6 +164,19 @@ GA_pseudorng: pseudorng
 					end if; 
 				end if;
 			else   -- AI**************************
+				if AIMoveDir = "00" then
+					if board2Y < BoardYmax then
+						board2Y <= board2Y + 1;
+					else
+						board2Y  <= BoardYmax ;
+					end if;
+				elsif AIMoveDir = "01" then
+					if board2Y > SquareYmin then
+						board2Y <= board2Y - 1;
+					else
+						board2Y <= "0000000000";
+					end if; 
+				end if;
 				
 				
 			end if;
