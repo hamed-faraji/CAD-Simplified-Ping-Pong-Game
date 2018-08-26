@@ -48,10 +48,39 @@ Component AI_player
   );
 end component;
 
+  signal ColorOutput: std_logic_vector(11 downto 0);
+  signal SquareX: std_logic_vector(9 downto 0) := "0000001011";  
+  signal SquareY: std_logic_vector(9 downto 0) := "0011110000";  
+  signal board1X: std_logic_vector(9 downto 0) := "0000000011";  
+  signal board1Y: std_logic_vector(9 downto 0) := "0010111110";
+  signal board2X: std_logic_vector(9 downto 0) := "1001111111";  
+  signal board2Y: std_logic_vector(9 downto 0) := "0010111110";
+  signal SquareXMoveDir, SquareYMoveDir: std_logic := '0';
+  --constant SquareWidth: std_logic_vector(4 downto 0) := "11001";
+  constant SquareXmin: std_logic_vector(9 downto 0) := "0000000001";
+  signal SquareXmax: std_logic_vector(9 downto 0); -- := "1010000000"-SquareWidth;
+  constant SquareYmin: std_logic_vector(9 downto 0) := "0000000001";
+  signal SquareYmax: std_logic_vector(9 downto 0); -- := "0111100000"-SquareWidth;
+  
+  constant boardYmin: std_logic_vector(9 downto 0) := "0000000001";
+  signal boardXmax: std_logic_vector(9 downto 0); -- := "1010000000"-SquareWidth;
+  signal boardYmax: std_logic_vector(9 downto 0); -- := "1010000000"-SquareWidth;
 
 
-
+  
+  signal ColorSelect: std_logic_vector(2 downto 0) := "001";
+  signal Prescaler: std_logic_vector(30 downto 0) := (others => '0');
+  signal Prescaler1: std_logic_vector(30 downto 0) := (others => '0');
+  signal Prescaler2: std_logic_vector(30 downto 0) := (others => '0');
+  
+  signal midlineX: std_logic_vector(9 downto 0) := "0101000000";
+  signal midlineY: std_logic_vector(9 downto 0) := "0000000000";
+  signal midlineWidth: std_logic_vector(9 downto 0) := "0000000111";
   signal random : STD_LOGIC_VECTOR (7 downto 0);
+  
+  signal player1scoreflag : std_logic :='0';
+  signal player2scoreflag : std_logic :='0';
+  signal AIMoveDir : std_logic_vector(1 downto 0) := "11";
 
 
 begin
