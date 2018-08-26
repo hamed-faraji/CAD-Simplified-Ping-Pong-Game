@@ -137,6 +137,41 @@ GA_pseudorng: pseudorng
 			end if;
 		end if;
 	end process;
+	
+	
+	Prescaler2Counter: process(CLK_50Mhz, RESET)
+	begin
+		if RESET = '1' then
+			Prescaler2 <= (others => '0');
+			board2X <= BoardXmax - 3;
+			board2Y <= "0010111110";
+		elsif rising_edge(CLK_50Mhz) then
+			if start_stop = '1' then 
+			Prescaler2 <= Prescaler2 + 1;	 
+			if Prescaler2 = "111111011111100000" then   -- Activated every 0,004 sec (4 msec)
+			if single_double = '0' then
+				if key2 = '0' then
+					if board2Y < BoardYmax then
+						board2Y <= board2Y + 1;
+					else
+						board2Y  <= BoardYmax ;
+					end if;
+				elsif key3 = '0' then
+					if board2Y > SquareYmin then
+						board2Y <= board2Y - 1;
+					else
+						board2Y <= "0000000000";
+					end if; 
+				end if;
+			else   -- AI**************************
+				
+				
+			end if;
+				Prescaler2 <= (others => '0');
+			end if;
+			end if;
+			end if;
+	end process Prescaler2Counter;
 
 
 
