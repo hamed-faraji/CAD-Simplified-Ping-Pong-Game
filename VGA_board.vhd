@@ -107,6 +107,36 @@ GA_pseudorng: pseudorng
 				SquareYmax 		=> SquareYmax,
 				board2Yout     => AIMoveDir
 			);
+			
+			
+			process(CLK_50Mhz, RESET)
+	begin
+		if RESET = '1' then
+			Prescaler1 <= (others => '0');
+			board1X <= "0000000111";
+			board1Y <= "0010111110";
+		elsif rising_edge(CLK_50Mhz) then
+		if start_stop = '1' then 
+			Prescaler1 <= Prescaler1 + 1;	 
+			if Prescaler1 = "111111011111100000" then  -- Activated every 0,004 sec (4 msec)
+				if key0 = '0' then
+					if board1Y < BoardYmax then
+						board1Y <= board1Y + 1;
+					else
+						board1Y  <= BoardYmax ;
+					end if;
+				elsif key1 = '0' then
+					if board1Y > SquareYmin then
+						board1Y <= board1Y - 1;
+					else
+						board1Y <= "0000000000";
+					end if;	 
+				end if;
+				Prescaler1 <= (others => '0');
+			end if;
+			end if;
+		end if;
+	end process;
 
 
 
