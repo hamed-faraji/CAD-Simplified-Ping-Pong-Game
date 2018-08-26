@@ -32,6 +32,21 @@ Component pseudorng
 			Q : out STD_LOGIC_VECTOR (7 downto 0)
 			);
 end component;
+Component AI_player
+	port (
+	board2Y,
+	squareX,
+	squareY:in std_logic_vector(9 downto 0);
+	SquareXMoveDir,
+	SquareYMoveDir,
+	level,
+	reset,
+	single_double:in std_logic;
+	SquareXmax: std_logic_vector(9 downto 0);
+	SquareYmax: std_logic_vector(9 downto 0);
+	board2Yout	:out std_logic_vector(1 downto 0)
+  );
+end component;
 
 
 
