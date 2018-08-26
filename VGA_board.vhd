@@ -92,6 +92,21 @@ GA_pseudorng: pseudorng
 				en => '1',
 				Q => random
 			);
+			
+			VGA_player : AI_player
+			port map(
+				board2Y        => board2Y,
+				reset				=> RESET,
+				squareX			=> SquareX,
+				squareY			=> SquareY,
+				SquareXMoveDir => SquareXMoveDir,
+				SquareYMoveDir => SquareYMoveDir,
+				level          => level,
+				single_double  => single_double,
+				SquareXmax     => SquareXmax,
+				SquareYmax 		=> SquareYmax,
+				board2Yout     => AIMoveDir
+			);
 
 
 
