@@ -220,6 +220,20 @@ GA_pseudorng: pseudorng
 					
 				else
 				-- default moving
+				if SquareXMoveDir = '0' then
+						if SquareX < SquareXmax then
+							SquareX <= SquareX + 1;
+							if(SquareX + SquareWidth = board2X  AND board2Y  <= SquareY + SquareWidth  AND SquareY <= board2Y+(SquareWidth+SquareWidth+SquareWidth+SquareWidth)) then
+								SquareXMoveDir <= '1';
+								ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
+							end if;
+					else
+						SquareXMoveDir <= '1';
+						player1score <= player1score+1;
+						player1scoreflag <= '1';  -- **************************
+						
+						ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
+					end if;
 				
 				else
 				
