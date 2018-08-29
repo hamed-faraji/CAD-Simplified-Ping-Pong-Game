@@ -269,7 +269,25 @@ GA_pseudorng: pseudorng
 			end if;
 			end if;
 		end if;
-	end process PrescalerCounter; 
+	end process PrescalerCounter;
+
+	ColorOutput <=		"111100000000" when ColorSelect(0) = '1' AND ScanlineX >= SquareX AND ScanlineY >= SquareY AND ScanlineX < SquareX+SquareWidth AND ScanlineY < SquareY+SquareWidth 
+					else	"000011110000" when ColorSelect(1) = '1' AND ScanlineX >= SquareX AND ScanlineY >= SquareY AND ScanlineX < SquareX+SquareWidth AND ScanlineY < SquareY+SquareWidth 
+					else	"000000001111" when ColorSelect(2) = '1' AND ScanlineX >= SquareX AND ScanlineY >= SquareY AND ScanlineX < SquareX+SquareWidth AND ScanlineY < SquareY+SquareWidth 
+					else	"000000001111" when player1score /= "1011" AND ScanlineX >= board1X AND ScanlineY >= board1Y AND ScanlineX < board1X+SquareWidth AND ScanlineY < board1Y+(SquareWidth+SquareWidth+SquareWidth+SquareWidth)
+					else	"000011110000" when player1score =  "1011" AND ScanlineX >= board1X AND ScanlineY >= board1Y AND ScanlineX < board1X+SquareWidth AND ScanlineY < board1Y+(SquareWidth+SquareWidth+SquareWidth+SquareWidth)
+					else	"000000001111" when player2score /= "1011" AND ScanlineX >= board2X AND ScanlineY >= board2Y AND ScanlineX < board2X+SquareWidth AND ScanlineY < board2Y+(SquareWidth+SquareWidth+SquareWidth+SquareWidth) 
+					else	"000011110000" when player2score =  "1011" AND ScanlineX >= board2X AND ScanlineY >= board2Y AND ScanlineX < board2X+SquareWidth AND ScanlineY < board2Y+(SquareWidth+SquareWidth+SquareWidth+SquareWidth)
+					else	"000000001111" when ScanlineX >= midlineX AND ScanlineY >= midlineY AND ScanlineX < midlineX+midlineWidth AND ScanlineY < midlineY +"0111100000"
+					else	"111111111111";
+
+	ColorOut <= ColorOutput;
+	
+	
+	SquareXmax <= "1010000000"-SquareWidth; -- (640 - SquareWidth)
+	SquareYmax <= "0111100000"-SquareWidth; -- (480 - SquareWidth)
+	BoardXmax <= "1010000000"-SquareWidth;
+	BoardYmax <= "0111100000"-(SquareWidth+SquareWidth+SquareWidth+SquareWidth);
 
 
 
