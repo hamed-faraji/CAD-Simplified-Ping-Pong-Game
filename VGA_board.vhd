@@ -202,6 +202,29 @@ GA_pseudorng: pseudorng
 			Prescaler <= Prescaler + speedMulti;	 
 			if Prescaler > "111111011110100000" then  -- Activated every 0,008 sec (8 msec)
 			
+			-- moving ball to the middle of screen after any scores
+				if player1scoreflag = '1' then
+					SquareX <= "0101000000"; -- middle of screen X
+					SquareY <= "0011110000"; -- middle of screen Y
+					SquareXMoveDir <='0';
+					player1scoreflag <='0';
+					player2scoreflag <='0';
+					SquareYMoveDir <= random(4) xor random(5) xor random(6) xor random(7); -- make it more different!
+				elsif player2scoreflag = '1' then 
+					SquareXMoveDir <='1';
+					SquareX <= "0101000000"; -- middle of screen X
+					SquareY <= "0011110000"; -- middle of screen Y
+					player1scoreflag <='0';
+					player2scoreflag <='0';
+					SquareYMoveDir <= random(4) xor random(5) xor random(6) xor random(7); -- make it more different!
+					
+				else
+				-- default moving
+				
+				else
+				
+				end if
+			
 			end if;
 				Prescaler <= (others => '0');
 			end if;
