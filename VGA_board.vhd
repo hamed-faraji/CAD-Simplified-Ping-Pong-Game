@@ -234,6 +234,19 @@ GA_pseudorng: pseudorng
 						
 						ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
 					end if;
+					if SquareX > SquareXmin then
+						SquareX <= SquareX - 1;
+						if(SquareX = board1X + SquareWidth AND board1Y <=SquareY + SquareWidth AND SquareY <= board1Y+(SquareWidth+SquareWidth+SquareWidth+SquareWidth)) then
+							SquareXMoveDir <= '0';
+							ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
+							end if;
+					else
+						SquareXMoveDir <= '0';
+						player2score <= player2score+1;
+						player2scoreflag <= '1'; -- *****************************
+						
+						ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
+					end if;	
 				
 				else
 				
