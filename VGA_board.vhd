@@ -185,6 +185,29 @@ GA_pseudorng: pseudorng
 			end if;
 			end if;
 	end process Prescaler2Counter;
+	
+	PrescalerCounter: process(CLK_50Mhz, RESET)
+	begin
+		if RESET = '1' then
+			Prescaler <= (others => '0');
+			SquareX <= "0101000000"; -- middle of screen X
+			SquareY <= "0011110000"; -- middle of screen Y
+			SquareXMoveDir <= random(0) xor random(1) xor random(2) xor random(3);
+			SquareYMoveDir <= random(4) xor random(5) xor random(6) xor random(7); -- make it more different!
+			player1score <= "0000";
+			player2score <= "0000";
+ 			ColorSelect <= "001";
+		elsif rising_edge(CLK_50Mhz) then
+			if start_stop = '1' then 
+			Prescaler <= Prescaler + speedMulti;	 
+			if Prescaler > "111111011110100000" then  -- Activated every 0,008 sec (8 msec)
+			
+			end if;
+				Prescaler <= (others => '0');
+			end if;
+			end if;
+		end if;
+	end process PrescalerCounter; 
 
 
 
