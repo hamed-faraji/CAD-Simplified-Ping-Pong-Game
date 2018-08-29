@@ -249,9 +249,21 @@ GA_pseudorng: pseudorng
 					end if;	
 				
 				else
-				
-				end if
-			
+					if SquareYMoveDir = '0' then
+					if SquareY < SquareYmax then
+						SquareY <= SquareY + 1;
+					else
+						SquareYMoveDir <= '1';
+						ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
+					end if;
+				else
+					if SquareY > SquareYmin then
+						SquareY <= SquareY - 1;
+					else
+						SquareYMoveDir <= '0';
+						ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
+					end if;	 
+				end if;	
 			end if;
 				Prescaler <= (others => '0');
 			end if;
