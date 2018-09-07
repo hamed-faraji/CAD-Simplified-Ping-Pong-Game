@@ -44,8 +44,42 @@ begin
 			SquareYMoveDir <= '0';
 			ColorSelect <= "001";
 		elsif rising_edge(CLK_50Mhz) then
-		
-		
+			Prescaler <= Prescaler + 1;	 
+			if Prescaler = "11000011010100000" then  -- Activated every 0,002 sec (2 msec)
+				if SquareXMoveDir = '0' then
+					if SquareX < SquareXmax then
+						SquareX <= SquareX + 1;
+					else
+						SquareXMoveDir <= '1';
+						ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
+					end if;
+				else
+					if SquareX > SquareXmin then
+						SquareX <= SquareX - 1;
+					else
+						SquareXMoveDir <= '0';
+						ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
+					end if;	 
+				end if;
+		  
+				if SquareYMoveDir = '0' then
+					if SquareY < SquareYmax then
+						SquareY <= SquareY + 1;
+					else
+						SquareYMoveDir <= '1';
+						ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
+					end if;
+				else
+					if SquareY > SquareYmin then
+						SquareY <= SquareY - 1;
+					else
+						SquareYMoveDir <= '0';
+						ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
+					end if;	 
+				end if;		  
+			
+				Prescaler <= (others => '0');
+			end if;
 		end if;
 	end process PrescalerCounter; 
 	
