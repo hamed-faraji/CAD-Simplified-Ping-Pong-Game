@@ -1,10 +1,11 @@
+----------------------------------------------------------------------------------
+-- Moving Square Demonstration 
+----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
-
-
 
 entity VGA_board is
   port ( CLK_50MHz		: in std_logic;
@@ -25,6 +26,8 @@ end VGA_board;
 
 architecture Behavioral of VGA_board is
 
+
+
 Component pseudorng
 	Port ( clock : in STD_LOGIC;
 			reset : in STD_LOGIC;
@@ -32,6 +35,7 @@ Component pseudorng
 			Q : out STD_LOGIC_VECTOR (7 downto 0)
 			);
 end component;
+
 Component AI_player
 	port (
 	board2Y,
@@ -66,8 +70,6 @@ end component;
   signal boardXmax: std_logic_vector(9 downto 0); -- := "1010000000"-SquareWidth;
   signal boardYmax: std_logic_vector(9 downto 0); -- := "1010000000"-SquareWidth;
 
-
-  
   signal ColorSelect: std_logic_vector(2 downto 0) := "001";
   signal Prescaler: std_logic_vector(30 downto 0) := (others => '0');
   signal Prescaler1: std_logic_vector(30 downto 0) := (others => '0');
@@ -81,11 +83,11 @@ end component;
   signal player1scoreflag : std_logic :='0';
   signal player2scoreflag : std_logic :='0';
   signal AIMoveDir : std_logic_vector(1 downto 0) := "11";
-
-
+	
+	
 begin
 
-GA_pseudorng: pseudorng
+	VGA_pseudorng: pseudorng
 			port map(
 				clock => CLK_50Mhz,
 				reset => RESET,
@@ -93,7 +95,7 @@ GA_pseudorng: pseudorng
 				Q => random
 			);
 			
-			VGA_player : AI_player
+	VGA_player : AI_player
 			port map(
 				board2Y        => board2Y,
 				reset				=> RESET,
@@ -109,7 +111,8 @@ GA_pseudorng: pseudorng
 			);
 			
 			
-			process(CLK_50Mhz, RESET)
+
+	process(CLK_50Mhz, RESET)
 	begin
 		if RESET = '1' then
 			Prescaler1 <= (others => '0');
@@ -137,6 +140,7 @@ GA_pseudorng: pseudorng
 			end if;
 		end if;
 	end process;
+	
 	
 	
 	Prescaler2Counter: process(CLK_50Mhz, RESET)
@@ -178,7 +182,6 @@ GA_pseudorng: pseudorng
 					end if; 
 				end if;
 				
-				
 			end if;
 				Prescaler2 <= (others => '0');
 			end if;
@@ -186,6 +189,7 @@ GA_pseudorng: pseudorng
 			end if;
 	end process Prescaler2Counter;
 	
+
 	PrescalerCounter: process(CLK_50Mhz, RESET)
 	begin
 		if RESET = '1' then
@@ -220,7 +224,7 @@ GA_pseudorng: pseudorng
 					
 				else
 				-- default moving
-				if SquareXMoveDir = '0' then
+					if SquareXMoveDir = '0' then
 						if SquareX < SquareXmax then
 							SquareX <= SquareX + 1;
 							if(SquareX + SquareWidth = board2X  AND board2Y  <= SquareY + SquareWidth  AND SquareY <= board2Y+(SquareWidth+SquareWidth+SquareWidth+SquareWidth)) then
@@ -234,6 +238,7 @@ GA_pseudorng: pseudorng
 						
 						ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
 					end if;
+				else
 					if SquareX > SquareXmin then
 						SquareX <= SquareX - 1;
 						if(SquareX = board1X + SquareWidth AND board1Y <=SquareY + SquareWidth AND SquareY <= board1Y+(SquareWidth+SquareWidth+SquareWidth+SquareWidth)) then
@@ -246,10 +251,10 @@ GA_pseudorng: pseudorng
 						player2scoreflag <= '1'; -- *****************************
 						
 						ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
-					end if;	
-				
-				else
-					if SquareYMoveDir = '0' then
+					end if;	 
+				end if;
+		  
+				if SquareYMoveDir = '0' then
 					if SquareY < SquareYmax then
 						SquareY <= SquareY + 1;
 					else
@@ -263,13 +268,13 @@ GA_pseudorng: pseudorng
 						SquareYMoveDir <= '0';
 						ColorSelect <= ColorSelect(1 downto 0) & ColorSelect(2);
 					end if;	 
-				end if;	
+				end if;		  
 			end if;
 				Prescaler <= (others => '0');
 			end if;
 			end if;
 		end if;
-	end process PrescalerCounter;
+	end process PrescalerCounter; 
 
 	ColorOutput <=		"111100000000" when ColorSelect(0) = '1' AND ScanlineX >= SquareX AND ScanlineY >= SquareY AND ScanlineX < SquareX+SquareWidth AND ScanlineY < SquareY+SquareWidth 
 					else	"000011110000" when ColorSelect(1) = '1' AND ScanlineX >= SquareX AND ScanlineY >= SquareY AND ScanlineX < SquareX+SquareWidth AND ScanlineY < SquareY+SquareWidth 
@@ -289,8 +294,7 @@ GA_pseudorng: pseudorng
 	BoardXmax <= "1010000000"-SquareWidth;
 	BoardYmax <= "0111100000"-(SquareWidth+SquareWidth+SquareWidth+SquareWidth);
 
-
-
-
-
+	
+	
 end Behavioral;
+
