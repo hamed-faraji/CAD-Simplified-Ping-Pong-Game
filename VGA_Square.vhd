@@ -3,7 +3,6 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
@@ -82,6 +81,15 @@ begin
 			end if;
 		end if;
 	end process PrescalerCounter; 
+
+	ColorOutput <=		"111100000000" when ColorSelect(0) = '1' AND ScanlineX >= SquareX AND ScanlineY >= SquareY AND ScanlineX < SquareX+SquareWidth AND ScanlineY < SquareY+SquareWidth 
+					else	"000011110000" when ColorSelect(1) = '1' AND ScanlineX >= SquareX AND ScanlineY >= SquareY AND ScanlineX < SquareX+SquareWidth AND ScanlineY < SquareY+SquareWidth 
+					else	"000000001111" when ColorSelect(2) = '1' AND ScanlineX >= SquareX AND ScanlineY >= SquareY AND ScanlineX < SquareX+SquareWidth AND ScanlineY < SquareY+SquareWidth 
+					else	"111111111111";
+
+	ColorOut <= ColorOutput;
 	
-end process PrescalerCounter; 
+	SquareXmax <= "1010000000"-SquareWidth; -- (640 - SquareWidth)
+	SquareYmax <= "0111100000"-SquareWidth;	-- (480 - SquareWidth)
 end Behavioral;
+
