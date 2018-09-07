@@ -34,5 +34,20 @@ architecture Behavioral of VGA_Square is
 
 begin
 
+	PrescalerCounter: process(CLK_50Mhz, RESET)
+	begin
+		if RESET = '1' then
+			Prescaler <= (others => '0');
+			SquareX <= "0111000101";
+			SquareY <= "0001100010";
+			SquareXMoveDir <= '0';
+			SquareYMoveDir <= '0';
+			ColorSelect <= "001";
+		elsif rising_edge(CLK_50Mhz) then
+		
+		
+		end if;
+	end process PrescalerCounter; 
+	
 end process PrescalerCounter; 
 end Behavioral;
