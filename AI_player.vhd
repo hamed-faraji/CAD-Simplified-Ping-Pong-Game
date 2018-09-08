@@ -34,6 +34,21 @@ architecture AI_player of AI_player is
 		end loop;
 		return modResult; 
 	end function modOperator;
+	
+	function divideOperator ( x,y    : in std_logic_vector(9 downto 0))
+		return std_logic_vector is
+		variable temp : std_logic_vector(9 downto 0) := (others => '0');
+		 variable divideResult : std_logic_vector(9 downto 0) := (others => '0');
+	begin
+		temp := x;
+		for i in 0 to 4 loop
+			if x >= y then 
+		  temp := temp - y;
+			divideResult := divideResult+1;
+			end if;
+		end loop;
+		return divideResult; 
+	end function divideOperator;
 
 begin
 
