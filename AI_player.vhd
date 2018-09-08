@@ -13,3 +13,15 @@ entity AI_player is
 	
 	);
 end AI_player;
+
+architecture AI_player of AI_player is								
+signal boardOutTemp : std_logic_vector(1 downto 0) := "11";	
+signal tempMode :std_logic_vector(9 downto 0);
+signal lastX : std_logic_vector(9 downto 0) := (others => '0');
+signal tempDivide :std_logic_vector(9 downto 0);
+signal nextPosition :std_logic_vector(9 downto 0);
+signal tempPosition :std_logic_vector(9 downto 0);
+
+begin
+
+end AI_player;
