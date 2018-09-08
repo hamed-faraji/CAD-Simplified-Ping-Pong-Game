@@ -65,8 +65,34 @@ begin
 			else
 		-- AI hard level
 		
+				if SquareXMoveDir = '0' then
+					--tempMode <= STD_LOGIC_VECTOR(UNSIGNED(SquareXmax) - UNSIGNED(squareX)) mod UNSIGNED(SquareYmax);
+					--tempDivide  <= STD_LOGIC_VECTOR(UNSIGNED(SquareXmax) - UNSIGNED(squareX)) / UNSIGNED(SquareYmax);
+					tempMode <= modOperator(SquareXmax - squareX,SquareYmax);
+					tempDivide <= divideOperator(SquareXmax-squareX,SquareYmax);
+					
+					if modOperator(tempDivide,"0000000010") = "0000000001" then
+					tempPosition <= SquareYmax - squareY;
+						if SquareYMoveDir = '0' then
+							nextPosition <= tempPosition - tempMode;
+						else 
+							nextPosition <= tempPosition + tempMode;
+						end if;
+						
+					else 
+						nextPosition <= SquareYmax - (tempMode - (SquareYmax-squareY));
+					end if;
+					
+					boardOutTemp <= "00" ;
+				else 
+					boardOutTemp <= "01" ; 
+				end if;
+		
 		end if;
 		end if;
 	end process;
+	
+	-- AI hard level
+	board2Yout <= boardOutTemp;
 
 end AI_player;
