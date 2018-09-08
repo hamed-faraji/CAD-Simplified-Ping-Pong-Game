@@ -52,4 +52,21 @@ architecture AI_player of AI_player is
 
 begin
 
+	process(single_double,level,SquareYMoveDir)
+	begin 					   
+		if single_double = '1' then
+		-- AI simple level
+			if level = '0' then
+				if SquareYMoveDir = '0' then
+					boardOutTemp <= "00" ;
+				else 
+					boardOutTemp <= "01" ; 
+				end if;
+			else
+		-- AI hard level
+		
+		end if;
+		end if;
+	end process;
+
 end AI_player;
